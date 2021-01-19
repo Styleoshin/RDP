@@ -1,4 +1,4 @@
-# Presentation
+# Description
 Remotely control virtual machine using Chrome Remote Desktop.
 
 # Image
