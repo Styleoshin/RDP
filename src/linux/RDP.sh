@@ -5,6 +5,15 @@ password="admin"
 desktop_env="xfce4"
 desktop_type="desktop-base"
 
+sessionDesktopEnv()
+{
+    if [ $desktop_env eq "xfce4" ] then
+    return "/usr/bin/xfce4-session"
+    elif [ $desktop_env eq "cinnamon-core" ] then
+    return "/usr/bin/cinnamon-session-cinnamon2d"
+    fi    
+}
+
 echo "Installing RDP Be Patience... " >&2
 {
 sudo useradd -m $user
@@ -17,7 +26,7 @@ sudo dpkg --install chrome-remote-desktop_current_amd64.deb
 sudo apt install --assume-yes --fix-broken
 sudo DEBIAN_FRONTEND=noninteractive \
 apt install --assume-yes $desktop_env $desktop_type
-sudo bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session'  
+sudo bash -c 'echo "exec /etc/X11/Xsession $(sessionDesktopEnv)" > /etc/chrome-remote-desktop-session'  
 sudo apt install --assume-yes xscreensaver
 sudo systemctl disable lightdm.service
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
