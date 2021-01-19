@@ -7,9 +7,9 @@ desktop_type="desktop-base"
 
 sessionDesktopEnv()
 {
-    if [ $desktop_env eq "xfce4" ] then
+    if [ $desktop_env eq "xfce4" ]; then
     return "/usr/bin/xfce4-session"
-    elif [ $desktop_env eq "cinnamon-core" ] then
+    elif [ $desktop_env eq "cinnamon-core" ]; then
     return "/usr/bin/cinnamon-session-cinnamon2d"
     fi    
 }
