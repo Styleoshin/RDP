@@ -1,28 +1,27 @@
 #! /bin/bash
 
 user="admin"
-password="admin123"
+password="admin"
 desktop_env="xfce4"
 desktop_type="desktop-base"
-distribution="google-chrome-stable_current_amd64.deb"
 
-printf "Installing RDP Be Patience... " >&2
+echo "Installing RDP Be Patience... " >&2
 {
 sudo useradd -m $user
-sudo adduser  $user sudo
-echo ' $user:$password' | sudo chpasswd
+sudo adduser $user sudo
+echo "${user}:${password}" | sudo chpasswd
 sed -i 's/\/bin\/sh/\/bin\/bash/g' /etc/passwd
 sudo apt-get update
-wget "https://dl.google.com/linux/direct/${distribution}"
-sudo dpkg --install $distribution
+wget https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb
+sudo dpkg --install chrome-remote-desktop_current_amd64.deb
 sudo apt install --assume-yes --fix-broken
 sudo DEBIAN_FRONTEND=noninteractive \
 apt install --assume-yes $desktop_env $desktop_type
 sudo bash -c 'echo "exec /etc/X11/Xsession /usr/bin/xfce4-session" > /etc/chrome-remote-desktop-session'  
 sudo apt install --assume-yes xscreensaver
 sudo systemctl disable lightdm.service
-wget "https://dl.google.com/linux/direct/${distribution}"
-sudo dpkg --install $distribution
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg --install google-chrome-stable_current_amd64.deb
 sudo apt install --assume-yes --fix-broken
 sudo apt install nautilus nano -y 
 sudo adduser $user chrome-remote-desktop
