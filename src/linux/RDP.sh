@@ -59,6 +59,7 @@ sudo apt install --assume-yes xscreensaver
 sudo systemctl disable lightdm.service
 
 if [ $complete ]; then
+echo "Complete installation... " >&2
 completeInstallation
 fi
 
