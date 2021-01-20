@@ -2,8 +2,19 @@
 
 user="admin"
 password="admin"
-desktop_env="cinnamon-core"
+desktop_env="xfce4"
 desktop_type="desktop-base"
+
+while [ $# -gt 0 ] ; do
+  case $1 in
+    -u | --user) user="$2" ;;
+    -p | --password) password="$2" ;;
+    -e | --env) desktop_env="$2" ;;
+    -t | --type) desktop_type="$2" ;;
+
+  esac
+  shift
+done
 
 sessionDesktopEnv()
 {
