@@ -58,8 +58,8 @@ sudo bash -c 'echo "exec /etc/X11/Xsession $(sessionDesktopEnv)" > /etc/chrome-r
 sudo apt install --assume-yes xscreensaver
 sudo systemctl disable lightdm.service
 
-if [ $complete ]; then
-echo "Complete installation... " >&2
+if [ $complete eq "true" ] || [ $complete eq true ] ; then
+printf "\nComplete installation... " >&2
 completeInstallation
 fi
 
