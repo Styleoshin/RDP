@@ -36,6 +36,12 @@ completeInstallation()
     fi    
 }
 
+echo "user =" $user >&2
+echo "password =" $password >&2
+echo "desktop_env =" $desktop_env >&2
+echo "desktop_type =" $desktop_type >&2
+echo "complete =" $complete >&2
+
 echo "Installing RDP Be Patience... " >&2
 {
 sudo useradd -m $user
