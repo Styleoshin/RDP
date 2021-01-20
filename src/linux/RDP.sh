@@ -2,7 +2,7 @@
 
 user="admin"
 password="admin"
-desktop_env="xfce4"
+desktop_env="cinnamon-core"
 desktop_type="desktop-base"
 
 sessionDesktopEnv()
