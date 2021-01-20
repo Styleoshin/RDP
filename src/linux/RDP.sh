@@ -4,6 +4,7 @@ user="admin"
 password="admin"
 desktop_env="xfce4"
 desktop_type="desktop-base"
+complete=false
 
 while [ $# -gt 0 ] ; do
   case $1 in
@@ -11,6 +12,7 @@ while [ $# -gt 0 ] ; do
     -p | --password) password="$2" ;;
     -e | --env) desktop_env="$2" ;;
     -t | --type) desktop_type="$2" ;;
+    -c | --complete) complete="$2" ;;
 
   esac
   shift
@@ -22,6 +24,15 @@ sessionDesktopEnv()
     return "/usr/bin/xfce4-session"
     elif [ $desktop_env eq "cinnamon-core" ]; then
     return "/usr/bin/cinnamon-session-cinnamon2d"
+    fi    
+}
+
+completeInstallation()
+{
+    if [ $desktop_env eq "xfce4" ]; then
+    sudo apt install --assume-yes task-xfce-desktop
+    elif [ $desktop_env eq "cinnamon-core" ]; then
+    sudo apt install --assume-yes task-cinnamon-desktop
     fi    
 }
 
@@ -40,6 +51,11 @@ apt install --assume-yes $desktop_env $desktop_type
 sudo bash -c 'echo "exec /etc/X11/Xsession $(sessionDesktopEnv)" > /etc/chrome-remote-desktop-session'  
 sudo apt install --assume-yes xscreensaver
 sudo systemctl disable lightdm.service
+
+if [ $complete ]; then
+completeInstallation
+fi
+
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg --install google-chrome-stable_current_amd64.deb
 sudo apt install --assume-yes --fix-broken
