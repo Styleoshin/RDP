@@ -24,6 +24,8 @@ sessionDesktopEnv()
     return "/usr/bin/xfce4-session"
     elif [ $desktop_env eq "cinnamon-core" ]; then
     return "/usr/bin/cinnamon-session-cinnamon2d"
+    elif [ $desktop_env eq "kde" ]; then
+    return "/usr/bin/startkde"  
     fi    
 }
 
@@ -33,6 +35,8 @@ completeInstallation()
     sudo apt install --assume-yes task-xfce-desktop
     elif [ $desktop_env eq "cinnamon-core" ]; then
     sudo apt install --assume-yes task-cinnamon-desktop
+    elif [ $desktop_env eq "kde" ]; then
+    sudo apt install --assume-yes task-kde-desktop
     fi    
 }
 
